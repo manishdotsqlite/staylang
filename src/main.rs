@@ -1,20 +1,14 @@
 use lexer::Lexer;
-use token::TokenType;
+use parser::Parser;
 
 mod lexer;
 mod library;
 mod token;
+mod parser;
 
 fn main() {
-        let source = String::from("PRINT \"How many fibonacci numbers do you want?\" \nINPUT nums \nLET a = 0 \nLET b = 1");
+        let source = String::from("LET foo = bar * 3 + 2\nIF foo > 0 THEN\nPRINT \"yes!\"\nENDIF");
         let mut lexer = Lexer::init(source);
-        lexer.nextChar();
-        
-        loop {
-                let token = lexer.get_token();
-                if token.token_type == TokenType::EOF {
-                        break;
-                }
-                println!("Token: {:?}, Literal: {}", token.token_type, token.literal);
-        }
+        let mut parser = Parser::init(lexer);
+        parser.program();
 }                      

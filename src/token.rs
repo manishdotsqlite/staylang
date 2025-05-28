@@ -1,6 +1,5 @@
-use enum_iterator::Sequence;
 
-#[derive(Debug, PartialEq, Sequence)]
+#[derive(Debug, PartialEq, Clone, Copy)]
 pub enum TokenType {
         EOF = -1,
         NEWLINE = 0,
@@ -32,9 +31,12 @@ pub enum TokenType {
 	LT = 208,
 	LTEQ = 209,
 	GT = 210,
-	GTEQ = 211
+	GTEQ = 211,
+
 }
 
+
+#[derive(Debug, Clone)]
 pub struct Token {
         pub literal: String,
         pub token_type: TokenType,
