@@ -36,4 +36,4 @@ bash
 
 ### usage
 
-# command: `staylang yourfile.stay`
+# command: `staylang yourfile.txt`
