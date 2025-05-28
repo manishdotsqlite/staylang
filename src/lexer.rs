@@ -1,5 +1,6 @@
 use crate::{library::nth_char, token::{Token, TokenType}};
 
+#[derive(Debug)]
 pub struct Lexer {
         pub source: String,
         pub cur_char: char,
@@ -42,8 +43,6 @@ impl Lexer {
             token = Token::new(self.cur_char.to_string(), TokenType::ASTERISK);
         } else if self.cur_char == '/' {
             token = Token::new(self.cur_char.to_string(), TokenType::SLASH);
-        } else if self.cur_char == '\n' {
-            token = Token::new(self.cur_char.to_string(), TokenType::NEWLINE);
         } else if self.cur_char == '=' {
                 if self.peek() == '=' {
                         let last_char = self.cur_char;
@@ -105,7 +104,7 @@ impl Lexer {
 
         } else if self.cur_char.is_numeric(){
                 let start_pos = self.cur_pos;
-                while self.peek().is_numeric() {
+                while self.peek().is_digit(10){
                         self.nextChar();
                 }
                 if self.peek() == '.' {
@@ -121,6 +120,17 @@ impl Lexer {
 
                 let toktext = &self.source[start_pos as usize..(self.cur_pos + 1_) as usize];
                 token = Token::new(toktext.to_string(), TokenType::NUMBER);
+
+        } else if self.cur_char == '\\' {
+                if self.peek() == 'n' {
+                        let last_char = self.cur_char;
+                        self.nextChar();
+                        token = Token::new(last_char.to_string() + &self.cur_char.to_string(), TokenType::NEWLINE);
+                
+                } else {
+                        panic!("Unexpected character: {}", self.cur_char);
+                }
+
         } else {
                 panic!("Unexpected character: {}", self.cur_char);
         }
