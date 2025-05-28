@@ -1,14 +1,14 @@
 ### staylang
 
-staylang is a lightweight interpreter for a simple, C-style educational scripting language written in Rust.
+staylang is a lightweight interpreter for a simple scripting language written in Rust.
 
 ### features
 
-familiar control structures:`LET, WHILE, INPUT, PRINT`
+- familiar control structures:`LET, WHILE, INPUT, PRINT`
 
-Easy-to-read syntax for teaching or scripting
+- easy-to-read syntax for teaching or scripting
 
-Written in performant, safe Rust
+- written in performant, safe Rust
 
 ### sample staylang File
 
@@ -36,6 +36,4 @@ bash
 
 ### usage
 
-bash
-
-`staylang yourfile.stay`
+# command: `staylang yourfile.stay`
